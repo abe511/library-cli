@@ -1,6 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Optional
-from utils import generate_id
+from .utils import generate_id
 
 @dataclass
 class Book:
@@ -13,6 +12,9 @@ class Book:
   def __str__(self) -> str:
     return f"{self.book_id}: {self.year}, {self.author}, {self.title} - {self.status}"
 
-  def change_status(self, status: Optional[str] = "выдана") -> None:
-    self.status = status
+  def change_status(self) -> None:
+    if self.status == "выдана":
+      self.status = "в наличии"
+      return
+    self.status = "выдана"
 

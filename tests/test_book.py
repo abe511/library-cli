@@ -1,3 +1,8 @@
+# import sys
+# import os
+# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+
 import unittest
 from src.book import Book
 
@@ -11,10 +16,10 @@ class TestBook(unittest.TestCase):
     self.assertEqual(self.book.author, "Автор книги")
     self.assertEqual(self.book.year, 1234)
     self.assertEqual(self.book.status, "в наличии")
-    self.assertIsInstance(self.book.book_id, str)
+    self.assertIsInstance(self.book.id, str)
   
   def test_str_representation(self):
-    expected = f"{self.book.book_id}: 1234, Автор книги, Название книги - в наличии"
+    expected = f"{self.book.id}: 1234, Автор книги, Название книги - в наличии"
     self.assertEqual(str(self.book), expected)
     
   def test_change_status(self):

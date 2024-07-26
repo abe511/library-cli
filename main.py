@@ -1,5 +1,4 @@
 
-
 def match_input(user_input: str) -> None:
   match user_input:
     case "1":
@@ -29,17 +28,15 @@ def show_menu() -> None:
 
 
 def main() -> None:
-  is_running: bool = True
-
   show_menu()
   
-  while is_running:
+  while True:
     user_input: str = input("Номер: ").strip()
     if user_input == "":
       continue
     
     if user_input == "6" or user_input == "exit":
-      is_running = False
+      break
 
     match_input(user_input)
 

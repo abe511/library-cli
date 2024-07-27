@@ -12,6 +12,9 @@ class CSVdb:
   # read file to object
   # return data or empty object
   def read(self) -> Union[List[Any], Exception]:
+    """
+      Read the db file and return an object with data.
+    """
     try:
       if os.path.exists(self.db_file):
         with open(self.db_file, "r", newline="") as csv_file:
@@ -23,9 +26,13 @@ class CSVdb:
     return []
 
 
-  # write header if no such file or file opened in "w" mode
-  # append data by default
   def write(self, data: List[Dict[Any, Any]], mode: Optional[str] = "a") -> Union[str, Exception]:
+    """
+      Write the headers and provided data to a db.\\
+      Create a db file if it does not exist.\\
+      Headers are not written to existing file.\\
+      Append new records to a db file. (default mode)
+    """
     try:
       file_exists = os.path.isfile(self.db_file)
       with open(self.db_file, mode, newline="") as csv_file:
@@ -39,18 +46,25 @@ class CSVdb:
 
 
   def add(self, new_data: Dict[Any, Any]) -> Union[str, Exception]:
+    """
+      Add a single object to db.
+    """
     return self.write([new_data])
 
 
   def get_all(self) -> List[Any]:
+    """
+      Retrieve a list of all db records.
+    """
     return self.read()
 
-  # read file
-  # find the record by id
-  # update necessary fields
-  # write to file
-  # return the updated record
+
   def update(self, id: str, update_data: Dict[Any, Any]) -> Union[Dict[Any, Any], Exception]:
+    """
+      Update a db record with provided data.\\
+      Find the record with matching `id` and create an object with updated fields.\\
+      Write the updated object to db.
+    """
     data = self.read()
     updated_record = {}
     for row in data:
@@ -64,11 +78,11 @@ class CSVdb:
     return response
 
 
-  # read file
-  # filter data
-  # write to file
-  # return status
   def remove(self, id: str) -> bool:
+    """
+      Remove the record with matching `id`.\\
+      Write modified data to db.
+    """
     data = self.read()
     filtered_data = [row for row in data if row["id"] != id]
     if len(filtered_data) < len(data):

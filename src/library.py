@@ -1,18 +1,17 @@
-from typing import List, Dict, Union, Any
+from typing import List, Union
 from .book import Book
 from .csvdb import CSVdb
 
 class Library:
 
   def __init__(self, db: CSVdb) -> None:
-    self.books = db.get_all()
     self.db = db
 
 
   def get_user_input(self, prompt: str, msg: str, type: str = "text", optional: bool = False) -> Union[str, int]:
     """
-      Get user input for text and number fields.
-      Try only once if input is optional.
+      Get user input for text and number fields.\\
+      Try only once if input is optional.\\
       Return validated input.
     """
     while True:
@@ -35,7 +34,7 @@ class Library:
 
   def get_id(self) -> Union[str, None]:
     """
-      Get the `id` from user input and check it against the db.
+      Get the `id` from user input and check it against the db.\\
       Return the `id`.
     """
     retry = 3
@@ -58,8 +57,8 @@ class Library:
 
   def add_book(self) -> None:
     """
-      Add a book to db. 
-      Get user input for `title`, `author` and `year`.
+      Add a book to db.\\
+      Get user input for `title`, `author` and `year`.\\
       Construct the book and write to the db.
     """
     title = self.get_user_input("Название: ", "Пожалуйста, введите название: ")
@@ -76,7 +75,7 @@ class Library:
 
   def remove_book(self) -> None:
     """
-      Remove the book from the db.
+      Remove the book from the db.\\
       Get the `id` from user and send a remove request.
     """
     id: str = self.get_id()
@@ -90,8 +89,8 @@ class Library:
 
   def search_book(self) -> None:
     """
-      Search books by `title`, `author` or `year`.
-      Get optional user input and return matching records.
+      Search books by `title`, `author` or `year`.\\
+      Get optional user input and return matching records.\\
       Return empty list if no input provided. 
     """
 
@@ -123,13 +122,13 @@ class Library:
 
   def show_books(self, data: List[Book] = None) -> List[Book]:
     """
-      Get the list of all books and print it in a nice format.
+      Get the list of all books and print in a nice format.
     """
     if not data:
       data = self.db.get_all()
-    print(f"ID \tСтатус \tГод \tАвтор \tНазвание")
+    print(f"ID\t  Статус\t Год\t Автор\t Название")
     for row in data:
-      print(f'{row["id"]}  {row["status"]} \t{row["year"]} \t{row["author"]} \t{row["title"]}')
+      print(f'{row["id"]}  {row["status"]}\t {row["year"]}\t {row["author"]}\t {row["title"]}')
 
 
   def search_book_by_id(self, id: str) -> bool:
@@ -143,17 +142,18 @@ class Library:
     return False
 
 
-  def change_status(self) -> Union[Dict[Any, Any], Exception]:
+  def change_status(self) -> None:
     """
-      Change book `status`.
-      Get the `id` from user input and search the book.
-      Get the `status` from user and modify it if the book is found.
-
+      Change book `status`.\\
+      Get the `id` from user input and search the book.\\
+      Get the `status` from user and modify it if the book is found.\\
       Statuses:
       * 1 - в наличии
       * 2 - выдана
     """
     id: str = self.get_id()
+    if not id:
+      return
     new_status: str = self.get_user_input("Статус (1 - в наличии | 2 - выдана): ", "Пожалуйста, введите статус (1 - в наличии | 2 - выдана): ")
 
     if new_status not in ["1", "2", "в наличии", "выдана"]:

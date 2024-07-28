@@ -9,8 +9,6 @@ class CSVdb:
     self.fields = fields
 
 
-  # read file to object
-  # return data or empty object
   def read(self) -> Union[List[Any], Exception]:
     """
       Read the db file and return an object with data.
@@ -89,26 +87,3 @@ class CSVdb:
       self.write(filtered_data, "w")
       return True
     return False
-
-
-
-# data = {'id': 'kv2v4ai7', 'title': 'title4565', 'author': 'author6786', 'year': 1234, 'status': 'в наличии'}
-# data = {'id': 'xcvc4ai7', 'title': 'title123', 'author': 'author534', 'year': 1231, 'status': 'в наличии'}
-data = {'id': 'zxz4ai7s', 'title': 'title567', 'author': 'author21', 'year': 4566, 'status': 'в наличии'}
-
-
-filename = "db.csv"
-fields = ["id", "title", "author", "year", "status"]
-
-
-
-# d1 = CSVdb(filename=filename, fields=fields)
-# print(d1.read())
-# print(d1.add(data))
-# print(d1.read())
-# print(d1.update("kv2v4ai7", {"status": "new status"}))
-# print(d1.update("xcvc4ai7", {"status": "updated3 status"}))
-# print(d1.update("zxz4ai7s", {"status": "some status"}))
-# print(d1.read())
-# print(d1.search({"title": "some title", "year": 1234}))
-

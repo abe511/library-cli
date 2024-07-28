@@ -1,8 +1,11 @@
+import random
+import string
+from typing import Optional
 from dataclasses import dataclass, field
-try:
-    from utils import generate_id
-except ImportError:
-    from .utils import generate_id
+
+
+def generate_id(length: Optional[int] = 8) -> str:
+  return "".join(random.choices(string.digits + string.ascii_lowercase, k=length))
 
 
 @dataclass
